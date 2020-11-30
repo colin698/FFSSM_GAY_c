@@ -24,7 +24,7 @@ public class Embauche {
      */
     public void terminer(LocalDate dateFin) {
          // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");	    
+        this.fin = dateFin;
     }
     
     /**

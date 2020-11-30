@@ -53,7 +53,10 @@ public class Licence {
      **/
     public boolean estValide(LocalDate d) {
          // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        if (this.getDelivrance().isBefore(d) && this.getDelivrance().plusYears(1).isAfter(d)){
+               return true;
+        }
+        return false;
     }
 
 }

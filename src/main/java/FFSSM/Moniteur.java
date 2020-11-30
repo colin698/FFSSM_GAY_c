@@ -4,12 +4,15 @@
 package FFSSM;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class Moniteur extends Personne {
 
     public int numeroDiplome;
+    public Embauche embaucher;
+    public List<Embauche> lesEmbauches = new ArrayList<>();
 
     public Moniteur(String numeroINSEE, String nom, String prenom, String adresse, String telephone, LocalDate naissance, int numeroDiplome) {
         super(numeroINSEE, nom, prenom, adresse, telephone, naissance);
@@ -23,7 +26,11 @@ public class Moniteur extends Personne {
      */
     public Optional<Club> employeurActuel() {
          // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        int index = this.lesEmbauches.size() - 1;
+        if (!this.numeroINSEE.equals(this.embaucher.getEmploye().numeroINSEE) || this.lesEmbauches.get(index).estTerminee()) {
+            return Optional.empty();     
+    }
+    return Optional.of(this.embaucher.getEmployeur());
     }
     
     /**
@@ -33,12 +40,14 @@ public class Moniteur extends Personne {
      */
     public void nouvelleEmbauche(Club employeur, LocalDate debutNouvelle) {   
          // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");	    
+        Embauche nouvelleEmbauche=new Embauche(debutNouvelle, this, employeur);
+        this.lesEmbauches.add(nouvelleEmbauche);
+        this.embaucher = nouvelleEmbauche;
     }
 
     public List<Embauche> emplois() {
          // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        return this.lesEmbauches;
     }
 
 }
